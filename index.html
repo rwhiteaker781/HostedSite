@@ -5,6 +5,7 @@
 		<!-- link to main stylesheet -->
 		<link rel="stylesheet" type="text/css" href="/css/main.css">
 		<title>Google SignIn</title>
+		<meta name="google-signin-scope" content="profile email">
 		<meta name="google-signin-client_id" content="175582178745-asiitv040tq5341vu063p67maub5lq1v.apps.googleusercontent.com">
 		<script src="https://apis.google.com/js/platform.js" async defer></script>
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
@@ -19,12 +20,22 @@
 	</head>
 	<body>
 		<div class="g-signin2" data-onsuccess="onSignIn"></div>
-		<div class="data">
-			<p>Profile Details</p>
-			<img id="pic" class="img-circle" width="100" height="100"/>
-			<p>Email Address</p>
-			<p id="email" class="alert alert-danger"></p>
-			<button onclick="signout()" class="btn btn-danger">SignOut</button>
+		 <script>
+     				 function onSignIn(googleUser) {
+       				 // Useful data for your client-side scripts:
+      				 var profile = googleUser.getBasicProfile();
+     				 console.log("ID: " + profile.getId()); // Don't send this directly to your server!
+      				 console.log('Full Name: ' + profile.getName());
+      				 console.log('Given Name: ' + profile.getGivenName());
+       				 console.log('Family Name: ' + profile.getFamilyName());
+       				 console.log("Image URL: " + profile.getImageUrl());
+       				 console.log("Email: " + profile.getEmail());
+
+        // The ID token you need to pass to your backend:
+        var id_token = googleUser.getAuthResponse().id_token;
+        console.log("ID Token: " + id_token);
+      }
+    </script>
 		<nav>
     		<ul>
         		<li><a href="/">Home</a></li>
